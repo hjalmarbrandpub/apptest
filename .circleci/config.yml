@@ -35,7 +35,7 @@ jobs:
           command: |
             mkdir tests
             pytest --version --junitxml=tests/junit.xml
-            pylint ./**/*.py --ouputformat=json
+            pylint ./**/*.py --output=tests/pylint.txt
             pytest --cov=apptest tests/
           name: Test
       - store_test_results:
