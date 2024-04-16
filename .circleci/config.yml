@@ -13,6 +13,11 @@ jobs:
     steps:
       # Step 1: obtain repo from GitHub
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "requirements.txt" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
       - python/install-packages:
           pkg-manager: pip
       - python/install-packages:    
@@ -28,9 +33,13 @@ jobs:
           pypi-cache: false
       - run:
           command: |
-            pytest --version
-            pylint ./**/*.py
+            mkdir tests
+            pytest --version --junitxml=tests/junit.xml
+            pylint ./**/*.py --ouputformat=json
+            pytest --cov=apptest tests/
           name: Test
+      - store_test_results:
+          path: tests
       - sonarcloud/scan
 workflows:
   main:
