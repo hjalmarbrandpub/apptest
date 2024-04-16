@@ -1,6 +1,7 @@
 # Python CircleCI 2.1 configuration file
 version: 2.1
-
+defaults: &defaults
+  working_directory: ~/repo
 orbs:
   sonarcloud: sonarsource/sonarcloud@2.0.0
   # using the latest pyhon orb
@@ -8,6 +9,7 @@ orbs:
 
 jobs:
   build_and_test:
+    <<: *defaults
     executor: python/default 
 
     steps:
@@ -44,4 +46,8 @@ jobs:
 workflows:
   main:
     jobs:
-      - build_and_test
+      - build_and_test:
+          context: dev
+          filters:
+            tags:
+              only: /^v.*/
