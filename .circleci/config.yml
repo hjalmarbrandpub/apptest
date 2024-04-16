@@ -36,7 +36,7 @@ jobs:
             mkdir tests
             pytest --version --junitxml=tests/junit.xml
             pylint ./**/*.py --output=tests/pylint.txt
-            pytest --cov=apptest tests/
+            pytest --cov=apptest /
           name: Test
       - store_test_results:
           path: tests
