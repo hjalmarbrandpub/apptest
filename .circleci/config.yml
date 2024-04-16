@@ -22,9 +22,14 @@ jobs:
           args: pytest
           pkg-manager: pip
           pypi-cache: false
+      - python/install-packages:
+          args: pylint
+          pkg-manager: pip
+          pypi-cache: false
       - run:
           command: |
             pytest --version
+            pylint ./**/*.py
           name: Test
       - sonarcloud/scan
 workflows:
