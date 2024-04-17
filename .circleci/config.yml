@@ -43,6 +43,15 @@ jobs:
       - store_test_results:
           path: tests
       - sonarcloud/scan
+  test_pypi_publish:
+    <<: *defaults
+    executor: python/default
+    steps:
+      - checkout # checkout source code to working directory
+      - run:
+          command: | # create whl, install twine and publish to Test PyPI
+            python3 setup.py sdist bdist_wheel
+            pip run twine upload --repository testpypi dist/*
 workflows:
   main:
     jobs:
@@ -51,3 +60,10 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+      - test_pypi_publish:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - dev

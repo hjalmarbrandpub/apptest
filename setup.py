@@ -1,3 +1,7 @@
+"""
+Setup file for packaging automation
+"""
+
 from setuptools import setup, find_packages
 
 VERSION = '1.0.1'
