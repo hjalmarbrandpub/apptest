@@ -36,12 +36,12 @@ jobs:
       - run:
           command: |
             mkdir tests
-            pytest --version --junitxml=tests/junit.xml
+            pytest --version 
             pylint ./**/*.py 
-            pytest --cov=. --cov-report=xml
+            pytest --cov --cov-report=xml 
           name: Test
       - store_test_results:
-          path: tests/junit.xml
+          path: tests
       - sonarcloud/scan
   test_pypi_publish:
     <<: *defaults
