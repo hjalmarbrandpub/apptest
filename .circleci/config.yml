@@ -36,8 +36,7 @@ jobs:
       - run:
           command: |
             mkdir tests
-            pytest --version
-            pytest --junitxml=tests/junit.xml 
+            pytest --version --junitxml=tests/junit.xml
             pylint ./**/*.py 
             pytest --cov --cov-report=xml 
           name: Test
