@@ -9,7 +9,7 @@ DESCRIPTION = 'A simple calculator app package'
 LONG_DESCRIPTION = 'A package that can add or subtract two values'
 
 setup(
-    name="hb-calc-app",
+    name="hb-calculador-app",
     version=VERSION,
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
