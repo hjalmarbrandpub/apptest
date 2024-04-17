@@ -43,6 +43,13 @@ jobs:
       - store_test_results:
           path: tests
       - sonarcloud/scan
+      - python/install-packages:
+          args: build
+          pkg-manager: pip
+          pypi-cache: false 
+      - run:
+          command: 
+            python -m build
   test_pypi_publish:
     <<: *defaults
     executor: python/default
@@ -52,13 +59,8 @@ jobs:
           args: twine
           pkg-manager: pip
           pypi-cache: false
-      - python/install-packages:
-          args: build
-          pkg-manager: pip
-          pypi-cache: false    
       - run:
           command: 
-            python -m build
             twine upload --repository testpypi dist/*
 workflows:
   main:
