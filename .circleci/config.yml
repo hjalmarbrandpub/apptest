@@ -5,6 +5,7 @@ defaults: &defaults
 orbs:
   sonarcloud: sonarsource/sonarcloud@2.0.0
   snyk: snyk/snyk@2.1.0
+  ggshield: gitguardian/ggshield@1.1.4
   # using the latest pyhon orb
   python: circleci/python@2.1.1
 
@@ -45,7 +46,7 @@ jobs:
       - store_test_results:
           path: tests
       - sonarcloud/scan
-      - snyk/scan
+      - ggshield/scan
   test_pypi_publish:
     <<: *defaults
     executor: python/default
