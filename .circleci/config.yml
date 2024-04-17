@@ -61,7 +61,7 @@ jobs:
           pypi-cache: false
       - run:
           command: 
-            twine upload --repository testpypi .dist/*
+            twine upload --repository testpypi ~/repo/dist/*
 workflows:
   main:
     jobs:
