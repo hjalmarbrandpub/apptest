@@ -41,7 +41,7 @@ jobs:
             pytest --cov=app --cov-report=xml
           name: Test
       - store_test_results:
-          path: tests
+          path: ./tests
       - sonarcloud/scan
   test_pypi_publish:
     <<: *defaults
