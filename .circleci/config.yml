@@ -52,7 +52,7 @@ jobs:
           args: twine
           pkg-manager: pip
           pypi-cache: false
-      python/install-packages:
+      - python/install-packages:
           args: build
           pkg-manager: pip
           pypi-cache: false    
