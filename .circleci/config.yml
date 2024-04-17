@@ -4,6 +4,7 @@ defaults: &defaults
   working_directory: ~/repo
 orbs:
   sonarcloud: sonarsource/sonarcloud@2.0.0
+  snyk: snyk/snyk@2.1.0
   # using the latest pyhon orb
   python: circleci/python@2.1.1
 
@@ -44,6 +45,7 @@ jobs:
       - store_test_results:
           path: tests
       - sonarcloud/scan
+      - snyk/scan
   test_pypi_publish:
     <<: *defaults
     executor: python/default
