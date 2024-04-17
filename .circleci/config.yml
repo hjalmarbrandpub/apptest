@@ -56,14 +56,14 @@ workflows:
   main:
     jobs:
       - build_and_test:
-          context: dev
-          filters:
-            tags:
-              only: /^v.*/
+          #context: dev
+          #filters:
+          #  tags:
+          #    only: /^v.*/
       - test_pypi_publish:
           requires:
             - build_and_test
-          filters:
-            branches:
-              only:
-                - dev
+          #filters:
+          #  branches:
+          #    only:
+          #      - dev
