@@ -43,7 +43,7 @@ jobs:
       - store_test_results:
           path: tests
       - sonarcloud/scan
-        test_pypi_publish:
+  test_pypi_publish:
     <<: *defaults
     executor: python/default
     steps:
