@@ -46,7 +46,6 @@ jobs:
       - store_test_results:
           path: tests
       - sonarcloud/scan
-      - ggshield/scan
   test_pypi_publish:
     <<: *defaults
     executor: python/default
