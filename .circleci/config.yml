@@ -65,6 +65,25 @@ jobs:
       - run:
           command: 
             twine upload --repository testpypi dist/*
+    pypi_publish:
+      <<: *defaults
+      executor: python/default
+      steps:
+        - checkout # checkout source code to working directory
+        - python/install-packages:
+            args: build
+            pkg-manager: pip
+            pypi-cache: false 
+        - run:
+            command: 
+              python -m build
+        - python/install-packages:
+            args: twine
+            pkg-manager: pip
+            pypi-cache: false
+        - run:
+            command: 
+              twine upload --repository pypi dist/*
 workflows:
   main:
     jobs:
@@ -80,3 +99,6 @@ workflows:
           #  branches:
           #    only:
           #      - dev
+      - pypi_publish:
+          requires:
+            - build_and_test
