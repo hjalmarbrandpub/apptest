@@ -40,7 +40,7 @@ jobs:
             mkdir tests
             pytest --version 
             pytest --junitxml=tests/junit.xml
-            pylint ./**/*.py 
+            pylint ./**/*.py --output-format=json:tests/lint.json
             pytest --cov --cov-report=xml 
           name: Test
       - store_test_results:
