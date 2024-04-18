@@ -15,5 +15,5 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(subtract(5, -3), 8)
         self.assertEqual(subtract(0, 0), 0)
 
-if __name__ == '__main__':
-    unittest.main()
+#if __name__ == '__main__':
+#    unittest.main()
