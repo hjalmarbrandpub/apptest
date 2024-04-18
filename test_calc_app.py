@@ -1,9 +1,10 @@
-""" Test application with utittest"""
+""" Test application with unittest"""
 import unittest
 from app import add, subtract
-"""Testing the app"""
+
 
 class TestCalculator(unittest.TestCase):
+    """Testing the app"""
     def test_add(self):
         """ addition test"""
         self.assertEqual(add(3, 5), 8)
@@ -18,4 +19,3 @@ class TestCalculator(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    sys.exit(0)
