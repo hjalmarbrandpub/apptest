@@ -92,7 +92,7 @@ jobs:
           pypi-cache: false
       - run:
           command: 
-            twine upload --repository pypi dist/* -u $TWINE_USER2 -p $TWINE_PASSWORD2
+            twine upload --repository pypi dist/* -u ${TWINE_USER2} -p ${TWINE_PASSWORD2}
 workflows:
   build_and_test:
     jobs:
