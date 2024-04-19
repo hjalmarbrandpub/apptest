@@ -4,7 +4,7 @@ Setup file for packaging automation
 
 from setuptools import setup, find_packages
 
-VERSION = '2.0.4'
+VERSION = '2.0.5'
 DESCRIPTION = 'A simple calculator app package'
 LONG_DESCRIPTION = 'A package that can add or subtract two values'
 
