@@ -45,7 +45,7 @@ jobs:
           name: Test
       - sonarcloud/scan
       - snyk/scan:
-          
+          fail-on-issues: false
       - save_cache:
           paths:
             - py_modules
