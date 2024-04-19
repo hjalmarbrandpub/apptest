@@ -92,7 +92,7 @@ jobs:
           pypi-cache: false
       - run:
           command: 
-            twine upload --repository pypi dist/*
+            twine upload dist/*
 workflows:
   build_and_test:
     jobs:
@@ -103,10 +103,18 @@ workflows:
       - test_pypi_publish:
           requires:
             - build_and_test
+          filters:
+            branches:
+              only:
+                - dev
           #filters:
           #  branches:
           #    only:
           #      - dev
       - pypi_publish:
           requires:
-            - test_pypi_publish
+            - build_and_test
+            filters:
+            branches:
+              only:
+                - main
