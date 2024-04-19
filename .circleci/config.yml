@@ -44,7 +44,8 @@ jobs:
             pytest --cov --cov-report=xml 
           name: Test
       - sonarcloud/scan
-      - snyk/scan
+      - snyk/scan:
+          
       - save_cache:
           paths:
             - py_modules
