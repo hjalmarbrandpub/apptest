@@ -43,9 +43,17 @@ jobs:
             pylint ./**/*.py --output-format=json:lint.json 
             pytest --cov --cov-report=xml 
           name: Test
+      - sonarcloud/scan
+      - snyk/scan
+      - save_cache:
+          paths:
+            - py_modules
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
       - store_test_results:
           path: tests
-      - sonarcloud/scan
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
   test_pypi_publish:
     <<: *defaults
     executor: python/default
@@ -65,30 +73,29 @@ jobs:
       - run:
           command: 
             twine upload --repository testpypi dist/*
-    pypi_publish:
-      <<: *defaults
-      executor: python/default
-      steps:
-        - checkout # checkout source code to working directory
-        - python/install-packages:
-            args: build
-            pkg-manager: pip
-            pypi-cache: false 
-        - run:
-            command: 
-              python -m build
-        - python/install-packages:
-            args: twine
-            pkg-manager: pip
-            pypi-cache: false
-        - run:
-            command: 
-              twine upload --repository pypi dist/*
+  pypi_publish:
+    <<: *defaults
+    executor: python/default
+    steps:
+      - checkout # checkout source code to working directory
+      - python/install-packages:
+          args: build
+          pkg-manager: pip
+          pypi-cache: false 
+      - run:
+          command: 
+            python -m build
+      - python/install-packages:
+          args: twine
+          pkg-manager: pip
+          pypi-cache: false
+      - run:
+          command: 
+            twine upload --repository pypi dist/*
 workflows:
-  main:
+  build_and_test:
     jobs:
       - build_and_test
-          #context: dev
           #filters:
           #  tags:
           #    only: /^v.*/
@@ -101,4 +108,4 @@ workflows:
           #      - dev
       - pypi_publish:
           requires:
-            - build_and_test
+            - test_pypi_publish
