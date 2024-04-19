@@ -103,10 +103,10 @@ workflows:
       - test_pypi_publish:
           requires:
             - build_and_test
-          filters:
-            branches:
-              only:
-                - dev
+            filters:
+              branches:
+                only:
+                  - dev
           #filters:
           #  branches:
           #    only:
@@ -115,6 +115,6 @@ workflows:
           requires:
             - build_and_test
             filters:
-            branches:
-              only:
-                - main
+              branches:
+                only:
+                  - main
